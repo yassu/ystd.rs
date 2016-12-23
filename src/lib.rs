@@ -1,6 +1,6 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
+mod ycore {
+    mod number {
+        mod yq32 {
+        }
     }
 }
