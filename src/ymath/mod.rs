@@ -1,3 +1,3 @@
 pub mod numbers{
-    pub mod q32;
+    pub mod yq32;
 }

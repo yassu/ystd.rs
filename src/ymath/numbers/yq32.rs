@@ -12,7 +12,7 @@ fn sgnf32(f: f32) -> String {
     }
 }
 
-pub struct Q32 {
+pub struct YQ32 {
     x: f32,
     y: f32,
     z: f32,
@@ -20,9 +20,9 @@ pub struct Q32 {
 }
 
 
-impl Q32 {
-    pub fn new(x: f32, y: f32, z: f32, w: f32) -> Q32 {
-        Q32 {x: x, y: y, z: z, w: w}
+impl YQ32 {
+    pub fn new(x: f32, y: f32, z: f32, w: f32) -> YQ32 {
+        YQ32 {x: x, y: y, z: z, w: w}
     }
 
     pub fn norm(self) -> f32 {
@@ -34,15 +34,15 @@ impl Q32 {
     }
 }
 
-impl std::clone::Clone for Q32 {
+impl std::clone::Clone for YQ32 {
     fn clone(&self) -> Self {
-        Q32::new(self.x.clone(), self.y.clone(),
+        YQ32::new(self.x.clone(), self.y.clone(),
                   self.z.clone(), self.w.clone())
     }
 }
 
 
-impl std::fmt::Display for Q32 {
+impl std::fmt::Display for YQ32 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let mut s:String = String::new();
 
@@ -85,22 +85,22 @@ impl std::fmt::Display for Q32 {
 }
 
 
-impl Neg for Q32 {
+impl Neg for YQ32 {
     type Output = Self;
-    fn neg(self) -> Q32 {
+    fn neg(self) -> YQ32 {
         let x = self.x.clone();
         let y = self.y.clone();
         let z = self.z.clone();
         let w = self.w.clone();
-        Q32::new(-x, -y, -z, -w)
+        YQ32::new(-x, -y, -z, -w)
     }
 }
 
 
-impl Add for Q32 {
+impl Add for YQ32 {
     type Output = Self;
-    fn add(self, rhs: Self) -> Q32 {
-        Q32::new (self.x.clone() + rhs.x.clone(),
+    fn add(self, rhs: Self) -> YQ32 {
+        YQ32::new (self.x.clone() + rhs.x.clone(),
                    self.y.clone() + rhs.y.clone(),
                    self.z.clone() + rhs.z.clone(),
                    self.w.clone() + rhs.w.clone())
@@ -108,10 +108,10 @@ impl Add for Q32 {
 }
 
 
-impl Sub for Q32 {
+impl Sub for YQ32 {
     type Output = Self;
-    fn sub(self, rhs: Self) -> Q32 {
-        Q32::new (self.x.clone() - rhs.x.clone(),
+    fn sub(self, rhs: Self) -> YQ32 {
+        YQ32::new (self.x.clone() - rhs.x.clone(),
                    self.y.clone() - rhs.y.clone(),
                    self.z.clone() - rhs.z.clone(),
                    self.w.clone() - rhs.w.clone())
@@ -119,9 +119,9 @@ impl Sub for Q32 {
 }
 
 
-impl Mul for Q32 {
+impl Mul for YQ32 {
     type Output = Self;
-    fn mul(self, rhs: Self) -> Q32 {
+    fn mul(self, rhs: Self) -> YQ32 {
         let x1 = self.x.clone();
         let y1 = self.y.clone();
         let z1 = self.z.clone();
@@ -131,7 +131,7 @@ impl Mul for Q32 {
         let z2 = rhs.z.clone();
         let w2 = rhs.w.clone();
 
-        Q32::new(
+        YQ32::new(
             x1*x2 - y1*y2 - z1*z2 - w1*w2,
             x1*y2 + x2*y1 + z1*w2 - w1*z2,
             x1*z2 - y1*w2 + x2*z1 + w1*y2,
@@ -141,9 +141,9 @@ impl Mul for Q32 {
 }
 
 
-impl Div for Q32 {
+impl Div for YQ32 {
     type Output = Self;
-    fn div(self, rhs: Self) -> Q32 {
+    fn div(self, rhs: Self) -> YQ32 {
         let norm = rhs.clone().norm();
 
         let x1 = self.x.clone();
@@ -155,7 +155,7 @@ impl Div for Q32 {
         let z2 = rhs.z.clone();
         let w2 = rhs.w.clone();
 
-        Q32::new(
+        YQ32::new(
             (x1*x2 - y1*y2 - z1*z2 - w1*w2)/(norm * norm),
             (x1*y2 + x2*y1 + z1*w2 - w1*z2)/(norm * norm),
             (x1*z2 - y1*w2 + x2*z1 + w1*y2)/(norm * norm),
