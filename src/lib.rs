@@ -1,6 +1,6 @@
-mod ycore {
-    mod number {
-        mod yq32 {
+mod ymath {
+    mod numbers {
+        mod q32 {
         }
     }
 }

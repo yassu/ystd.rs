@@ -1,3 +1,4 @@
+use std;
 use std::ops::{Neg, Add, Mul, Sub, Div};
 
 
@@ -11,7 +12,7 @@ fn sgnf32(f: f32) -> String {
     }
 }
 
-struct Q32 {
+pub struct Q32 {
     x: f32,
     y: f32,
     z: f32,
@@ -20,15 +21,15 @@ struct Q32 {
 
 
 impl Q32 {
-    fn new(x: f32, y: f32, z: f32, w: f32) -> Q32 {
+    pub fn new(x: f32, y: f32, z: f32, w: f32) -> Q32 {
         Q32 {x: x, y: y, z: z, w: w}
     }
 
-    fn norm(self) -> f32 {
+    pub fn norm(self) -> f32 {
         self.x * self.x + self.y * self.y + self.z * self.z + self.w * self.w
     }
 
-    fn to_tuple(self) -> (f32, f32, f32, f32) {
+    pub fn to_tuple(self) -> (f32, f32, f32, f32) {
         (self.x, self.y, self.z, self.w)
     }
 }
